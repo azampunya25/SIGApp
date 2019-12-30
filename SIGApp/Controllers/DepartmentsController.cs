@@ -20,23 +20,23 @@ namespace SIGApp.Controllers
         //}
 
         // GET: Departments
-        public async Task<IActionResult> Index()
-        {
-            return Ok(await _context.Departments.ToListAsync());
-            //return View(await _context.Departments.ToListAsync());
-        }
+        // public async Task<IActionResult> Index()
+        // {
+        //     return Ok(await _context.Departments.ToListAsync());
+        //     //return View(await _context.Departments.ToListAsync());
+        // }
 
-        //[HttpGet]
-        //public IActionResult Index()
-        //{
-        //    List<Department> data = this._context.Departments.ToList();
+        [HttpGet]
+        public IActionResult Index()
+        {
+           List<Department> data = this._context.Departments.ToList();
         //    if (!data.Any())
         //    {
         //        return NotFound();
         //    }
-        //    //return View(data);
-        //    return Ok(data);
-        //}
+           return View(data);
+           //return Ok(data);
+        }
 
         //public IActionResult Create()
         //{
