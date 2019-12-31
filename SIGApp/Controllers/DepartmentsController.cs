@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataContextLayer.DataContext;
 using DataContextLayer.Models;
+using DataContextLayer.Entity;
 
 namespace SIGApp.Controllers
 {
@@ -20,22 +21,28 @@ namespace SIGApp.Controllers
         //}
 
         // GET: Departments
-        // public async Task<IActionResult> Index()
-        // {
-        //     return Ok(await _context.Departments.ToListAsync());
-        //     //return View(await _context.Departments.ToListAsync());
-        // }
-
         [HttpGet]
         public IActionResult Index()
         {
-           List<Department> data = this._context.Departments.ToList();
-        //    if (!data.Any())
-        //    {
-        //        return NotFound();
-        //    }
-           return View(data);
-           //return Ok(data);
+            List<Department> data = this._context.Departments.ToList();
+            if (!data.Any())
+            {
+                return NotFound();
+            }
+            return View(data);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDepartement()
+        {
+            VoyageResult result = new VoyageResult();          
+            result.status = "S";
+            result.data = await _context.Departments.ToListAsync();
+            if (!result.data.Any())
+            {
+                return NotFound(result);
+            }
+            return Ok(result);
         }
 
         //public IActionResult Create()

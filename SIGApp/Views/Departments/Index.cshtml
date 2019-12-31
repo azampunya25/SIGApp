@@ -5,8 +5,61 @@
 }
 
 <h2>Index</h2>
+<table id="ctbl" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>DepartmentCode</th>
+            <th>DepartmentName</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+</table>
+@section Scripts {
+    <script>
+        $(function () {
+            //$('#ctbl').DataTable(
+            //    {
+            //        ajax: {
+            //            //url: 'https://api.myjson.com/bins/1qtdx',
+            //            url: '/Departments/GetDepartement',
+            //            dataSrc: 'responseData'
+            //        },
+            //        columns: [
+            //            { data: "DepartmentCode" },
+            //            { data: "DepartmentName" },
+            //            { data: "Description" }
+            //        ]
 
+            //    });
+            GetData();
+        })
 
+        function GetData() {
+            window.invokeControllerGET("Departments", "GetDepartement", null,
+                function (result) {
+                    var retval = result.data;
+                    debugger;
+                    if (retval != null) {
+                        var data = [];
+                        if (!$.isArray(retval)) data.push(retval);
+                        else data = retval;
+                        dataSource = data;
+                    }
+                    else {
+                        dataSource = [];
+                    }
+                    //theTable.clear();
+                    //theTable.rows.add(dataSource);
+                    //theTable.draw();
+                },
+                function (jqXHR, exception) {
+                    alert(exception);
+                },
+                true
+            )
+        }
+    </script>
+}
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -27,23 +80,24 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepartmentCode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepartmentName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.DepartmentId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.DepartmentId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.DepartmentId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartmentCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartmentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.DepartmentId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.DepartmentId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.DepartmentId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

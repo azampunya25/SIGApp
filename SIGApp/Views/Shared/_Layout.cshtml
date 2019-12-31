@@ -7,6 +7,7 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/datatables.net-bs/css/dataTables.bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
     <environment exclude="Development">
@@ -31,7 +32,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                    <li><a asp-area="" asp-controller="Departments" asp-action="Index">Department</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
             </div>
@@ -51,6 +52,9 @@
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/Helper.js"></script>
+        <script src="~/lib/datatables.net/js/jquery.dataTables.js"></script>
+        <script src="~/lib/datatables.net-bs/js/dataTables.bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
@@ -70,5 +74,13 @@
     </environment>
 
     @RenderSection("Scripts", required: false)
+
+    @{
+        var serviceBase = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.PathBase}";
+    }
+
+    <script>
+            window.ServiceBaseUrl = '@serviceBase';
+    </script>
 </body>
 </html>
