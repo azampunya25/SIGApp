@@ -7,7 +7,8 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 What things you need to install the software and how to install them
-Tools used in app sig
+```
 Visual Stuido 2017
 .Net Core 2.1
 SQL Server
+```
