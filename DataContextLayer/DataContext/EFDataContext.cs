@@ -14,6 +14,10 @@ namespace DataContextLayer.DataContext
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Role> Roles { get; set; }
+
+        public DbSet<Menu> Menus { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=FMF-HO-PROG4;Initial Catalog=SIG;Integrated Security=False;Persist Security Info=False;User ID=sa;Password=finansia");
